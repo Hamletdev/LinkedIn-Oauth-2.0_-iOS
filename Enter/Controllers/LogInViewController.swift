@@ -31,7 +31,7 @@ class LogInViewController: UIViewController {
     
     let logInButton: UIButton = {
         let inButton = UIButton(type: UIButton.ButtonType.system)
-        inButton.layer.cornerRadius = 2
+        inButton.layer.cornerRadius = 4
         inButton.backgroundColor = .systemBlue
         inButton.titleLabel?.numberOfLines = 0
         inButton.setTitle("Login", for: .normal)
