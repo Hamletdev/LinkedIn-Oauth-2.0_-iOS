@@ -37,6 +37,7 @@ class LogInViewController: UIViewController {
         inButton.setTitle("Login", for: .normal)
         inButton.setTitleColor(.white, for: .normal)
         inButton.titleLabel?.font = .systemFont(ofSize: 20, weight: UIFont.Weight.medium)
+        inButton.addTarget(self, action: #selector(logInButtonTapped), for: UIControl.Event.touchUpInside)
         
         return inButton
     }()
@@ -92,6 +93,11 @@ class LogInViewController: UIViewController {
         self.constructVerticalStack()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
 
 }
 
@@ -106,6 +112,12 @@ extension LogInViewController {
         self.view.addSubview(aStackView)
         aStackView.anchorView(logoContainerView.bottomAnchor, leftEdge: self.view.leftAnchor, bottomEdge: nil, rightEdge: self.view.rightAnchor, topPadding: 50, leftPadding: 40, bottomPadding: 0, rightPadding: 40, height: 0, width: 0)
         
-        
     }
+    
+    
+    @objc func logInButtonTapped() {
+        self.navigationController?.pushViewController(WebViewController(), animated: true)
+    }
+    
+    
 }
