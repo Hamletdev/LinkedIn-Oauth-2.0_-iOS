@@ -85,6 +85,8 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        self.navigationController?.navigationBar.isHidden = true
+        
         self.view.addSubview(self.logoContainerView)
         logoContainerView.anchorView(self.view.topAnchor, leftEdge: self.view.leftAnchor, bottomEdge: nil, rightEdge: self.view.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 0, height: self.view.frame.size.height / 5, width: self.view.frame.size.width)
         self.constructVerticalStack()
