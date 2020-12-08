@@ -8,9 +8,19 @@
 
 import UIKit
 
-class LogInViewController: UIViewController {
+class LogInViewController: UIViewController, WebViewControllerDelegate {
+    
     
     // MARK: - Properties
+    
+    let authServer = AuthorizationServer()
+    let webVC = WebViewController()
+    
+    var tokens: Tokens?
+    var profile: Profile? = nil
+    
+    
+    
     let logoContainerView: UIView = {
         let logoIV = UIView()
         logoIV.backgroundColor = UIColor(red: 25/255, green: 98/255, blue: 166/255, alpha: 1.0)
@@ -60,7 +70,7 @@ class LogInViewController: UIViewController {
         fnLabel.numberOfLines = 0
         fnLabel.adjustsFontSizeToFitWidth = true
         
-        let mutAttrString = NSMutableAttributedString(string: "Name:", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.thin), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        let mutAttrString = NSMutableAttributedString(string: "Last Name:", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.thin), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         mutAttrString.append(NSAttributedString(string: "  No Name", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium), NSAttributedString.Key.foregroundColor: UIColor.black]))
         fnLabel.attributedText = mutAttrString
         
@@ -73,8 +83,8 @@ class LogInViewController: UIViewController {
         emLabel.numberOfLines = 0
         emLabel.adjustsFontSizeToFitWidth = true
         
-        let mutAttrString = NSMutableAttributedString(string: "Email:", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.thin), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        mutAttrString.append(NSAttributedString(string: "  No Email", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium), NSAttributedString.Key.foregroundColor: UIColor.black]))
+        let mutAttrString = NSMutableAttributedString(string: "ID:", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.thin), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        mutAttrString.append(NSAttributedString(string: "  No UserID", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium), NSAttributedString.Key.foregroundColor: UIColor.black]))
         emLabel.attributedText = mutAttrString
         
         emLabel.textAlignment = .center
@@ -82,7 +92,7 @@ class LogInViewController: UIViewController {
     }()
     
     
-// MARK: - Methods
+    // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -91,14 +101,34 @@ class LogInViewController: UIViewController {
         self.view.addSubview(self.logoContainerView)
         logoContainerView.anchorView(self.view.topAnchor, leftEdge: self.view.leftAnchor, bottomEdge: nil, rightEdge: self.view.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 0, height: self.view.frame.size.height / 5, width: self.view.frame.size.width)
         self.constructVerticalStack()
+        
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(applicationDidBecomeActive(_:)),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil)
+        
+        updateUI()
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
     }
     
-
+    func updateAccessToken(_ accessToken: String) {
+        self.tokens = Tokens(accessToken: accessToken)
+        self.checkState(self.tokens!.accessToken)
+    }
+    
+    @objc func applicationDidBecomeActive(_ notification: NSNotification) {
+        if let value =  UserDefaults.standard.value(forKey: "LIAccessToken") {
+            self.checkState(value as! String)
+        }
+    }
+    
 }
 
 
@@ -116,8 +146,72 @@ extension LogInViewController {
     
     
     @objc func logInButtonTapped() {
-        self.navigationController?.pushViewController(WebViewController(), animated: true)
+        if self.tokens == nil {
+            self.authServer.authorize(viewController: self, webViewController: self.webVC, handler: { (success) in
+                if !success {
+                    //TODO: show error
+                    self.updateUI()
+                }
+            })
+        } else {
+            self.logout()
+            updateUI()
+        }
     }
     
+    
+    func updateUI() {
+        DispatchQueue.main.async {
+            
+            if self.tokens == nil {
+                if self.authServer.receivedCode == nil {
+                    
+                    let mutAttrString = NSMutableAttributedString(string: "Last Name:", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.thin), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+                    mutAttrString.append(NSAttributedString(string: "  No Name", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium), NSAttributedString.Key.foregroundColor: UIColor.black]))
+                    self.fullNameLabel.attributedText = mutAttrString
+                    
+                    let mutAttrString1 = NSMutableAttributedString(string: "ID:", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: UIFont.Weight.thin), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+                    mutAttrString1.append(NSAttributedString(string: "  No UserID", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: UIFont.Weight.medium), NSAttributedString.Key.foregroundColor: UIColor.black]))
+                    self.emailLabel.attributedText = mutAttrString1
+                    
+                    self.statusLabel.text = "Log-Out"
+                    
+                } else {
+                }
+                self.logInButton.setTitle("Login", for: UIControl.State.normal)
+                
+            } else {
+                if self.profile?.name == nil {
+                } else {
+                    self.fullNameLabel.text = self.profile?.name
+                    self.emailLabel.text = self.profile?.email
+                    self.statusLabel.text = "Logged- In"
+                }
+                self.logInButton.setTitle("Logout", for: UIControl.State.normal)
+                
+            }
+        }
+    }
+    
+    
+    private func checkState(_ accessT: String) {
+        
+        self.tokens?.accessToken = accessT
+        
+        self.authServer.getProfile(accessToken: accessT, handler: { (profile) in
+            self.profile = profile
+            self.updateUI()
+        })
+        
+        self.updateUI()
+        
+    }
+    
+    func logout() {
+        tokens = nil
+        profile = nil
+        authServer.reset()
+        UserDefaults.standard.removeObject(forKey: "LIAccessToken")
+    }
     
 }

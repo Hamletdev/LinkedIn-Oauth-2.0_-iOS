@@ -10,6 +10,7 @@
 		DA1D28F1247153C300C70FD0 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1D28F0247153C300C70FD0 /* WebViewController.swift */; };
 		DA2A54BB2471377B00046E2E /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2A54BA2471377B00046E2E /* LogInViewController.swift */; };
 		DA2A54BF2471385200046E2E /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2A54BE2471385200046E2E /* UIView.swift */; };
+		DA5BA57C24727D1D000B8349 /* AutorizationServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5BA57B24727D1D000B8349 /* AutorizationServer.swift */; };
 		DA6886892469552700EB31A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6886882469552700EB31A9 /* AppDelegate.swift */; };
 		DA68868B2469552700EB31A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68868A2469552700EB31A9 /* SceneDelegate.swift */; };
 		DA6886902469552700EB31A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA68868E2469552700EB31A9 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 		DA1D28F0247153C300C70FD0 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		DA2A54BA2471377B00046E2E /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		DA2A54BE2471385200046E2E /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		DA5BA57B24727D1D000B8349 /* AutorizationServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutorizationServer.swift; sourceTree = "<group>"; };
 		DA6886852469552700EB31A9 /* Enter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA6886882469552700EB31A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA68868A2469552700EB31A9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 		DA2A54B82471372B00046E2E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DA5BA57B24727D1D000B8349 /* AutorizationServer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA2A54BF2471385200046E2E /* UIView.swift in Sources */,
+				DA5BA57C24727D1D000B8349 /* AutorizationServer.swift in Sources */,
 				DA6886892469552700EB31A9 /* AppDelegate.swift in Sources */,
 				DA68868B2469552700EB31A9 /* SceneDelegate.swift in Sources */,
 				DA1D28F1247153C300C70FD0 /* WebViewController.swift in Sources */,
