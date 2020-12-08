@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 let domain = "https://www.linkedin.com/oauth/v2"
 let clientId = "ENTER_YOUR_APP_CLIENT_ID"
 let clientSecret = "ENTER_YOUR_APP_SECRET"  // get app clientid and client secret from linkedin developer app page.
