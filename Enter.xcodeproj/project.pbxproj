@@ -11,6 +11,7 @@
 		DA2A54BB2471377B00046E2E /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2A54BA2471377B00046E2E /* LogInViewController.swift */; };
 		DA2A54BF2471385200046E2E /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA2A54BE2471385200046E2E /* UIView.swift */; };
 		DA5BA57C24727D1D000B8349 /* AutorizationServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5BA57B24727D1D000B8349 /* AutorizationServer.swift */; };
+		DA64B3AB257F96600040B65A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DA64B3AA257F96600040B65A /* README.md */; };
 		DA6886892469552700EB31A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6886882469552700EB31A9 /* AppDelegate.swift */; };
 		DA68868B2469552700EB31A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68868A2469552700EB31A9 /* SceneDelegate.swift */; };
 		DA6886902469552700EB31A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA68868E2469552700EB31A9 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 		DA2A54BA2471377B00046E2E /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		DA2A54BE2471385200046E2E /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		DA5BA57B24727D1D000B8349 /* AutorizationServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutorizationServer.swift; sourceTree = "<group>"; };
+		DA64B3AA257F96600040B65A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		DA6886852469552700EB31A9 /* Enter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA6886882469552700EB31A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA68868A2469552700EB31A9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 		DA6886872469552700EB31A9 /* Enter */ = {
 			isa = PBXGroup;
 			children = (
+				DA64B3AA257F96600040B65A /* README.md */,
 				DA2A54B92471373300046E2E /* Others */,
 				DA2A54B82471372B00046E2E /* Model */,
 				DA2A54B72471372300046E2E /* Views */,
@@ -176,6 +179,7 @@
 			files = (
 				DA6886952469552F00EB31A9 /* LaunchScreen.storyboard in Resources */,
 				DA6886922469552F00EB31A9 /* Assets.xcassets in Resources */,
+				DA64B3AB257F96600040B65A /* README.md in Resources */,
 				DA6886902469552700EB31A9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
